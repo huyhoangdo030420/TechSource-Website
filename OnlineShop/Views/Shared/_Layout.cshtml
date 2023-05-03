@@ -1,0 +1,176 @@
+﻿<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="description" content="@ViewBag.Descriptions" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    @*<link href="~/assets/client/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/assets/client/css/bootstrap-social.css" rel="stylesheet" />
+        <link href="~/assets/client/css/bootstrap-theme.css" rel="stylesheet" />
+        <link href="~/assets/client/scss/jquery-ui.css" rel="stylesheet" />
+        <link href="~/assets/client/css/fontawesome.min.css" rel="stylesheet" />
+        <link href="/assets/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="/assets/client/css/slider.css" rel="stylesheet" type="text/css" media="all" />*@
+    <link href="~/assets/admin/vendor/fontawesome-free/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/assets/admin/vendor/fontawesome-free/css/all.css" rel="stylesheet" />
+    <script src="~/assets/admin/vendor/fontawesome-free/js/fontawesome.min.js"></script>
+
+    <link href="~/assets/admin/suite/codebase/suite.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/core");
+    @*<script src="~/assets/client/js/jquery-3.6.3.min.js"></script>
+        <script src="~/assets/client/js/jquery-ui.js"></script>
+        <script src="~/assets/client/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/assets/client/js/move-top.js"></script>
+        <script type="text/javascript" src="/assets/client/js/easing.js"></script>
+        <script type="text/javascript" src="/assets/client/js/startstop-slider.js"></script>*@
+    <script src="~/assets/admin/suite/codebase/suite.js"></script>
+    @Scripts.Render("~/bundles/jscore");
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">
+            <div class="headertop_desc" style="height: 50px;">
+
+                @{Html.RenderAction("TopMenu", "Home");}
+            </div>
+            <div class="header_top">
+                
+
+                @{ Html.RenderAction("HeaderCart", "Home");}
+
+                <script type="text/javascript">
+                    function DropDown(el) {
+                        this.dd = el;
+                        this.initEvents();
+                    }
+                    DropDown.prototype = {
+                        initEvents: function () {
+                            var obj = this;
+
+                            obj.dd.on('click', function (event) {
+                                $(this).toggleClass('active');
+                                event.stopPropagation();
+                            });
+                        }
+                    }
+
+                    $(function () {
+
+                        var dd = new DropDown($('#dd'));
+
+                        $(document).click(function () {
+                            // all dropdowns
+                            $('.wrapper-dropdown-2').removeClass('active');
+                        });
+
+                    });
+
+                </script>
+                <div class="clear"></div>
+            </div>
+            <div class="header_bottom">
+                
+
+                @{Html.RenderAction("MainMenu", "Home");}
+                <span class="fa-stack fa-lg" style="float:right;margin-top: 10px; margin-right:10px">
+                    <i id="filter-btn" class="fas fa-filter fa-stack-1x"></i>
+
+                </span>
+                <div class="search_box">
+                    <form action="/tim-kiem" method="get">
+                        <input type="text" id="txtKeyword" name="keyword" placeholder="Gõ từ khoá"><input type="submit" value="">
+                    </form>
+                </div>
+
+
+                <div class="clear"></div>
+            </div>
+
+            @RenderSection("Slide", required: false)
+
+        </div>
+
+        @RenderBody()
+
+    </div>
+    <div class="footer">
+        @{Html.RenderAction("Footer", "Home");}
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <style>
+        .fa-stack {
+            position: relative;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            line-height: 1em;
+            vertical-align: middle;
+        }
+
+        .fa-stack-2x {
+            font-size: 2em;
+        }
+
+        .fa-stack-1x,
+        .fa-stack-2x {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .fa-filter {
+            color: white;
+        }
+
+        .fa-circle {
+            color: #007bff;
+        }
+    </style>
+
+
+
+    <script>
+        const filterBtn = document.getElementById('filter-btn');
+        const dialog = document.getElementById('my-dialog');
+
+        filterBtn.addEventListener('click', () => {
+           
+            
+            if (dialog.style.display === "none") {
+                dialog.style.bottom = '0';
+                dialog.style.display = "block";
+            } else {
+                dialog.style.display = "none";
+            }
+        });
+        document.addEventListener('click', (event) => {
+            if (!dialog.contains(event.target) && event.target !== filterBtn) {
+                dialog.style.bottom = '-500px';
+                dialog.style.display = "none";
+            }
+        });
+    </script>
+
+    <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+    @Scripts.Render("~/bundles/controller");
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>
+

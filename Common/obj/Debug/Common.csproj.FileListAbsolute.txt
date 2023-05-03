@@ -1,0 +1,14 @@
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\Common.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\Common.pdb
+C:\Users\huyho\source\repos\OnlineShop\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\huyho\source\repos\OnlineShop\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\huyho\source\repos\OnlineShop\Common\obj\Debug\Common.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\obj\Debug\Common.pdb
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\Common.dll.config
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\BotDetect.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\BotDetect.Web.Mvc.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\System.Data.SQLite.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\System.Data.SQLite.xml
+C:\Users\huyho\source\repos\OnlineShop\Common\obj\Debug\Common.csproj.CopyComplete
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\Facebook.dll
+C:\Users\huyho\source\repos\OnlineShop\Common\bin\Debug\Facebook.xml

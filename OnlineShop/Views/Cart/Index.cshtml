@@ -1,0 +1,87 @@
+﻿@model List<OnlineShop.Models.CartItem>
+@{
+    ViewBag.Title ="Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter
+    {
+    <script src="/assets/client/js/Controller/CartController.js"></script>
+    }
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Mã SP</td>
+                        <td>Tên SP</td>
+                        <td>Ảnh SP</td>
+                        <td>Số lượng</td>
+                        <td>Đơn giá</td>
+                        <td>Thành tiền</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Product.ID</td>
+                            <td>@item.Product.Name</td>
+                            <td><img src="@item.Product.Image" width="100" /></td>
+                            <td><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                            @{
+                                if (item.Product.IncludedVAT == true)
+                                {
+                                    <td>@item.Product.PromotionPrice.Value.ToString("N0")</td>
+                                }
+                                else
+                                {
+                                    <td>@item.Product.Price.ToString("N0")</td>
+                                }
+                            }
+
+                            <td>@((item.Product.Price * item.Quantity).ToString("N0"))</td>
+                            <td><a href="#" data-id="@item.Product.ID" class="btn-delete">Xoá</a></td>
+                        </tr>
+                        
+
+
+                    }
+                        @{ 
+                            int i = 0;
+                            decimal Sum = 0;
+                            for(i = 0;i < Model.Count; i++)
+                            {
+                                if (Model[i].Product.IncludedVAT == true)
+                                {
+                                    Sum = (Sum + (Model[i].Product.PromotionPrice.Value * Model[i].Quantity));
+                                }
+                                else
+                                {
+                                    Sum = (Sum + (Model[i].Product.Price * Model[i].Quantity));
+                                }
+
+                            }
+                        }
+                        <tr style="text-align:right">
+                            <td colspan="7" style="margin-right:20px"> Tổng đơn hàng: @Sum.ToString("N0") </td>
+                        </tr>
+                </tbody>
+            </table>
+
+            <button id="btnContinue" class="btn">Tiếp tục mua hàng</button>
+            <button id="btnUpdate" class="btn">Cập nhật giỏ hàng</button>
+            <button id="btnDeleteAll" class="btn">Xoá giỏ hàng</button>
+            <button id="btnPayment" class="btn">Thanh toán</button>
+        }
+        else
+        {
+            <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+        }
+
+    </div>
+</div>
+
+

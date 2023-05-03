@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "Quản lý phân quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section Heared{
+    Phân Quyền
+}
+
+@section jsFooter
+    {
+    <script>
+        const listA = [
+            {
+                id: 1,
+                text: "MOD",
+                items: [
+                    {
+                        id: 2,
+                        text: "Hệ thống",
+                        items: [
+                            { id: 3, text: "Phân Quyền" },
+                            { id: 4, text: "Người dùng" }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        text: "Tin tức",
+                        items: [
+                            {
+                                id: 6,
+                                text: "Danh mục"
+                            },
+                            {
+                                id: 7,
+                                text: "Tin tức"
+                            }
+                        ]
+                    },
+                    {
+                        id: 8,
+                        text: "Sản phẩm",
+                        items: [
+                            {
+                                id: 9,
+                                text: "Sản phẩm"
+                            },
+                            {
+                                id: 10,
+                                text: "Khuyến mại"
+                            },
+                            {
+                                id: 11,
+                                text: "Danh mục"
+                            }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        text: "Quản lý chung",
+                        items: [
+                            {
+                                id: 13,
+                                text: "Giới thiệu"
+                            },
+                            {
+                                id: 14,
+                                text: "Đơn hàng"
+                            },
+                            {
+                                id: 15,
+                                text: "Footer"
+                            },
+                            {
+                                id: 16,
+                                text: "Menu"
+                            },
+                            {
+                                id: 17,
+                                text: "Slite"
+                            },
+                            {
+                                id: 18,
+                                text: "Phản hồi"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 19,
+                text: "MEMBER",
+                items: [
+                    {
+                        id: 20,
+                        text: "Hệ thống",
+                        items: [
+                            { id: 21, text: "Phân Quyền" },
+                            { id: 22, text: "Người dùng" }
+                        ]
+                    },
+                    {
+                        id: 23,
+                        text: "Tin tức",
+                        items: [
+                            {
+                                id: 24,
+                                text: "Danh mục"
+                            },
+                            {
+                                id: 25,
+                                text: "Tin tức"
+                            }
+                        ]
+                    },
+                    {
+                        id: 26,
+                        text: "Sản phẩm",
+                        items: [
+                            {
+                                id: 27,
+                                text: "Sản phẩm"
+                            },
+                            {
+                                id: 28,
+                                text: "Khuyến mại"
+                            },
+                            {
+                                id: 29,
+                                text: "Danh mục"
+                            }
+                        ]
+                    },
+                    {
+                        id: 30,
+                        text: "Quản lý chung",
+                        items: [
+                            {
+                                id: 31,
+                                text: "Giới thiệu"
+                            },
+                            {
+                                id: 32,
+                                text: "Đơn hàng"
+                            },
+                            {
+                                id: 33,
+                                text: "Footer"
+                            },
+                            {
+                                id: 34,
+                                text: "Menu"
+                            },
+                            {
+                                id: 35,
+                                text: "Slite"
+                            },
+                            {
+                                id: 36,
+                                text: "Phản hồi"
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+        ];
+
+        const tree = new dhx.Tree("tree", {
+            checkbox: true,
+            data: listA
+        });
+
+        
+
+        function check() {
+            const id = tree.selection.getId();
+            tree.checkItem(id);
+        }
+
+        function uncheck() {
+            const id = tree.selection.getId();
+            tree.uncheckItem(id);
+        }
+    </script>
+}
+<!-- auxiliary controls for interacting with the sample -->
+<link rel="stylesheet" href="https://snippet.dhtmlx.com/codebase/assets/css/auxiliary_controls.css">
+
+<!-- component container -->
+<div style="padding: 40px; background: #fff;" id="tree"></div>

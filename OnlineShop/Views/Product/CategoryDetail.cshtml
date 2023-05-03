@@ -1,0 +1,150 @@
+﻿@model List< Models.ViewModel.ProductViewModel>
+@{
+    var category = (Models.EF.ProductCategory)ViewBag.Category;
+    ViewBag.Title = category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    
+    <div class="section group">
+        <div class="header_bottom_left">
+            <div class="categories">
+                @{ Html.RenderAction("ProductCategory", "Product");}
+            </div>
+        </div>
+        <div class="header_bottom_right">
+            <div class="content_top">
+                <div class="heading">
+                    <h3>@category.Name</h3>
+                </div>
+                <div class="see">
+                    <p><a href="#">See all Products</a></p>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                var stringPrice = item.Price.ToString("#,000");
+
+                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="grid_1_of_4 images_1_of_4">
+                    <a href="@link"><img src="@item.Images" alt="" /></a>
+                    <h2>@item.Name </h2>
+                    @{ if (item.IncludedVAT == true)
+                        {
+                            var PromotionPrices = item.PromotionPrice?.ToString("#,000");
+                            <div class="price-details">
+
+                                <div>
+                                    <span class="text-label text-gray-20" style="font-size: 14px; line-height: 100%;line-height:300%">
+                                        Từ
+                                    </span> <span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1; color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                        @PromotionPrices
+                                    </span>
+                                </div> <div class="text-ui">
+                                    <span class="line-through" style="text-decoration: line-through;">
+                                        @item.Price.ToString("#,000")
+                                    </span> <span class="font-bold" style="font-weight: 700;">
+                                        -@(((item.Price - item.PromotionPrice)/item.Price)?.ToString("#%"))
+                                    </span>
+                                </div>
+
+                                <div class="add-cart">
+                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="price-details">
+                                <div class="price-number">
+                                    <p><span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1;font-size:15px;  color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                      @stringPrice
+                                    </span></p>
+                                </div>
+                                <div class="add-cart">
+                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        }
+
+                    }
+
+                </div>
+
+
+
+
+
+            }
+
+        </div>
+
+                
+                
+                
+
+
+            
+            <!--Phân trang-->
+            <div class="clear"></div>
+            <!--Phân trang-->
+            @if (ViewBag.TotalPage > 1)
+            {
+                var pageDisplay = (int)ViewBag.MaxPage;
+                int totalPage = (int)ViewBag.TotalPage;
+                int currentPage = ((int)ViewBag.Page);
+
+                // Create numeric links
+                var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
+                <nav>
+                    <ul class="pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                            <li>
+                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev"><i class="fa fa-angle-left"></i></a>
+                            </li>
+
+                        }
+                        @for (int i = startPageIndex; i <= endPageIndex; i++)
+                        {
+                            if (currentPage == i)
+                            {
+
+                                <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+
+
+                            <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                            <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                        }
+
+                    </ul>
+                </nav>
+
+            }
+            else
+            {
+                <span>Không có bản ghi nào</span>
+            }
+        </div>
+
+    </div>
+
+

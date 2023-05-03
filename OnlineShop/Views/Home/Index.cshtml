@@ -1,0 +1,269 @@
+﻿
+@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var slides = (List<Models.EF.Slide>)ViewBag.Slides;
+    var listNewProducts = (List<Models.EF.Product>)ViewBag.NewProducts;
+    var listFeatureProduct = (List<Models.EF.Product>)ViewBag.FeatureProducts;
+    var listProducer = (List<Models.EF.Producer>)ViewBag.manufacturer;
+    var listCategory = (List<Models.EF.ProductCategory>)ViewBag.category;
+}
+<div id="my-dialog" style="display: none; position: fixed; top: 200px; right: 170px; width: 65%; height: 10%; background-color: rgba(0,0,0,0.5); border-radius: 4px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); transition: all 0.3s ease-in-out; z-index: 999; transition-duration: 1s; ">
+    <!-- Nội dung của trang dialog ở đây -->
+
+    <form style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center;" action="/Home/Index" method="post">
+        <div style="display: flex; flex-direction:row;">
+            <label for="manufacturer" style="color: white;">Hãng sản phẩm:</label>
+            <select id="manufacturer" name="manufacturer">
+                <option value="">-- Chọn hãng --</option>
+                @{
+                    for (int i = 0; i < listProducer.Count; i++)
+                    {
+                        <option value="@listProducer[i].ID">@listProducer[i].Name</option>
+                    }
+                }
+
+
+            </select>
+
+            <label for="price" style="color: white;">Giá sản phẩm:</label>
+            <select id="price" name="price">
+                <option value="">-- Chọn giá --</option>
+                <option value="duoi-5-trieu">Dưới 5 triệu</option>
+                <option value="tu-5-den-10-trieu">Từ 5 đến 10 triệu</option>
+                <option value="tren-10-trieu">Trên 10 triệu</option>
+            </select>
+
+            <label for="category" style="color: white;">Loại sản phẩm:</label>
+            <select id="category" name="category">
+                <option value="">-- Chọn loại --</option>
+                @{
+                    for (int i = 0; i < listCategory.Count; i++)
+                    {
+                        <option value="@listCategory[i].ID">@listCategory[i].Name</option>
+                    }
+                }
+
+            </select>
+
+            <input type="submit" value="Tìm kiếm">
+        </div>
+    </form>
+</div>
+@section slide
+    {
+    <div class="header_slide">
+        <div class="header_bottom_left">
+            <div class="categories">
+                @{ Html.RenderAction("ProductCategory", "Product");}
+            </div>
+        </div>
+        <div class="header_bottom_right">
+            <div class="slider">
+                <div id="slider">
+                    <div id="mover">
+
+                        @foreach (var item in slides)
+                        {
+                            <div class="slide">
+                                <div class="slider-img">
+                                    <a href="@item.Link"><img src="@item.Image" alt="learn more" /></a>
+                                </div>
+                                <div class="slider-text">
+                                    <h1>Clearance<br><span>SALE</span></h1>
+                                    <h2>UPTo 20% OFF</h2>
+                                    <div class="features_list">
+                                        <h4>Get to Know More About Our Memorable Services Lorem Ipsum is simply dummy text</h4>
+                                    </div>
+                                    <a href="preview.html" class="button">Shop Now</a>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+}
+
+<div class="main" style="padding: 40px;">
+    <div class="content">
+        
+        <div class="section group" style="margin-top: 20px">
+
+            <div class="header_bottom_right" style="width: 100%">
+                <div class="main">
+
+                    <div class="content">
+                        <div class="content_top">
+                            <div class="heading">
+                                <h3>Sản phẩm mới</h3>
+                            </div>
+                            <div class="see">
+                                <p><a href="/san-pham">Xem tất cả sản phẩm</a></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="section group">
+                            @foreach (var item in listNewProducts)
+                            {
+                                var stringPrice = item.Price.ToString("#,000");
+
+                                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                <div class="grid_1_of_4 images_1_of_4" style=" height: 320px;">
+                                    <a href="@link"><img style="height: 138px" src="@item.Image" alt="" /></a>
+                                    <h2 style="height:55px;">@item.Name </h2>
+                                    @{ if (item.IncludedVAT == true)
+                                        {
+                                            var PromotionPrices = item.PromotionPrice?.ToString("#,000");
+                                            <div class="price-details">
+
+                                                <div>
+                                                    <span class="text-label text-gray-20" style="font-size: 14px; line-height: 100%;line-height:300%">
+                                                        Từ
+                                                    </span> <span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1; color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                                        @PromotionPrices
+                                                    </span>
+                                                </div> <div class="text-ui">
+                                                    <span class="line-through" style="text-decoration: line-through;">
+                                                        @item.Price.ToString("#,000")
+                                                    </span> <span class="font-bold" style="font-weight: 700;">
+                                                        -@(((item.Price - item.PromotionPrice)/item.Price)?.ToString("#%"))
+                                                    </span>
+                                                </div>
+
+                                                <div class="add-cart" style="border-radius: 70%; display: inline-block; padding: 10px 20px; background-color: #008CBA; color: white; text-align: center;">
+                                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="price-details">
+                                                <div class="price-number">
+                                                    <p>
+                                                        <span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1;font-size:15px;  color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                                            @stringPrice
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="add-cart">
+                                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        }
+
+                                    }
+
+                                </div>
+
+
+
+
+
+                            }
+
+                        </div>
+                        <div class="content_bottom">
+                            <div class="heading">
+                                <h3>Sản phẩm khuyến mãi</h3>
+                            </div>
+                            <div class="see">
+                                <p><a href="#">Xem tất cả sản phẩm</a></p>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="section group">
+                            @foreach (var item in listFeatureProduct)
+                            {
+                                var stringPrice = item.Price.ToString("#,000");
+
+                                var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                                <div class="grid_1_of_4 images_1_of_4" style=" height: 355px;">
+                                    <a href="@link"><img style="height: 138px" src="@item.Image" alt="" /></a>
+                                    <h2 style="height:55px;">@item.Name </h2>
+                                    @{ if (item.IncludedVAT == true)
+                                        {
+                                            var PromotionPrices = item.PromotionPrice?.ToString("#,000");
+                                            <div class="price-details">
+
+                                                <div>
+                                                    <span class="text-label text-gray-20" style="font-size: 14px; line-height: 100%;line-height:300%">
+                                                        Từ
+                                                    </span> <span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1; color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                                        @PromotionPrices
+                                                    </span>
+                                                </div> <div class="text-ui">
+                                                    <span class="line-through" style="text-decoration: line-through;">
+                                                        @item.Price.ToString("#,000")
+                                                    </span> <span class="font-bold" style="font-weight: 700;">
+                                                        -@(((item.Price - item.PromotionPrice)/item.Price)?.ToString("#%"))
+                                                    </span>
+                                                </div>
+
+                                                <div class="add-cart" style="margin-top: 7px">
+                                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="price-details">
+                                                <div class="price-number">
+                                                    <p>
+                                                        <span class="text-body font-bold text-light-magenta" style="--tw-text-opacity: 1;font-size:15px;  color: rgba(254, 52, 100, var(--tw-text-opacity)); font-weight: 700; ">
+                                                            @stringPrice
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="add-cart" style="margin-top: 7px">
+                                                    <h4><a href="/them-gio-hang?productId=@item.ID&quantity=1">Thêm vào giỏ hàng</a></h4>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        }
+
+                                    }
+
+                                </div>
+
+
+
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--Phân trang-->
+                <div class="clear"></div>
+                <!--Phân trang-->
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<style>
+    .add-cart a {
+        border-radius: 3%;
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: white;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+</style>

@@ -1,0 +1,101 @@
+﻿@model PagedList.IPagedList<Models.EF.Producer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section Heared
+    {
+    Danh sách nhà sản xuất
+}
+@section jsFooter
+    {
+    <script src="/assets/admin/js/Controller/ProducerController.js"></script>
+    <script>$(".myActionLinkId").prepend("<i class='fas fa-trash'></i> ");</script>
+}
+
+<div class="form-group">
+    <div class="col-lg-12">
+
+
+        @using (Html.BeginForm("Index", "Producer", FormMethod.Get))
+        {
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div class="col-md-4" style="display:flex; max-width:100%">
+                        <input style="width: 50%; margin-right: 50px; margin-left: 200px" type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+                        <button style="margin-right: 10px" type="submit" class="btn btn-success">Tìm kiếm</button>
+                        <a class="btn btn-primary" href="/Admin/Producer/Create">Thêm mới</a>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr style="text-align:center">
+
+                            <th>Tên</th>
+                            <th>Ảnh</th>
+
+
+
+                            <th>Trạng thái</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID" style="text-align:center">
+
+                                <td>@item.Name</td>
+                                <td><img src="@item.Image" width="100px" height="100px" /></td>
+
+
+
+                                <td>
+                                    <a href="#" class="btn-active" data-id="@item.ID">
+                                        @if (item.Status)
+                                        {
+                                            <i class="fa fa-check-circle"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-times-circle"></i>
+                                        }
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/Admin/Producer/Edit/@item.ID" class="edit-btn"><i class="fas fa-pencil-alt"></i></a>
+                                    |
+                                    @Ajax.ActionLink(" ", "Delete", new { @id = item.ID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xoá bản ghi này?",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                   HttpMethod = "Delete"
+                               }, new { @class = "myActionLinkId" })
+
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+                @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                     new { @ViewBag.Seachstring, page }))
+            </div>
+        </div>
+
+    </div>
+</div>
