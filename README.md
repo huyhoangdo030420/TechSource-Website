@@ -1,5 +1,5 @@
 Trang Web có các chức năng cơ bản như: đăng nhập(có sử dụng đăng nhập bằng facebook, google), đăng kí,tìm kiếm sản phẩm, liên hệ, quản lý giỏ hàng, đăng ký mua hàng, quản lý người dùng, quản lý sản phẩm, quản lý tin tức, quản lý danh mục, quản lý đơn hàng, quản lý thương hiệu...
-Ngoài ra, còn có các chức năng khác như xác nhận bằng mã Captcha,Google Maps API, đa ngôn ngữ, xuất file excel, biểu đồ doanh thu, thông báo đơn hàng  mới(dử dụng SignalR).
+Ngoài ra, còn có các chức năng khác như xác nhận bằng mã Captcha,Google Maps API, đa ngôn ngữ, xuất file excel, biểu đồ doanh thu, thông báo đơn hàng  mới(sử dụng SignalR).
 Trang Web có tích hợp các công cụ quản lý ảnh ckfinder, trình soạn thảo ckeditor.
   
   
