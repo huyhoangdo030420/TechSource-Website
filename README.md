@@ -19,6 +19,8 @@
   
 ![image](https://user-images.githubusercontent.com/103048467/236106842-1fa0dccb-6bb1-470c-bf0c-eb3624866af6.png)
 
+![image](https://github.com/huyhoangdo030420/TechSource-Website/assets/103048467/077cd47c-7aef-4708-b2f7-6efa97b4f174)
+
 ![image](https://user-images.githubusercontent.com/103048467/236107082-0dc80234-1ba8-4159-9d0d-ded37cd4d3ba.png)
 
 ![image](https://user-images.githubusercontent.com/103048467/236107145-3bbc3512-0cd2-412e-a507-d6a764f0c2d7.png)
@@ -29,7 +31,7 @@
 
 ![image](https://user-images.githubusercontent.com/103048467/236107368-887f210e-085c-44c1-ba18-2e12360bb0a0.png)
 
-![image](https://user-images.githubusercontent.com/103048467/236107454-6f01b7fa-ca2e-4dad-bfc4-39284368b39d.png)
+![image](https://github.com/huyhoangdo030420/TechSource-Website/assets/103048467/e4924729-3c75-429e-a0e8-ae1434885f36)
 
 ![image](https://user-images.githubusercontent.com/103048467/236107592-fc7b6ed4-e6bd-4a92-a001-154c90800b3f.png)
 
@@ -37,5 +39,10 @@
 
 ![image](https://user-images.githubusercontent.com/103048467/236107876-8f38f25f-0ca0-4b3a-aa85-1fa691e76a68.png)
 
-![image](https://user-images.githubusercontent.com/103048467/236107952-f19a7c1c-e4e3-4d09-9b2b-2389b3dfc3b7.png)
+![image](https://github.com/huyhoangdo030420/TechSource-Website/assets/103048467/e796308d-013a-47df-9e2f-5f23bf901955)
+
+![image](https://github.com/huyhoangdo030420/TechSource-Website/assets/103048467/41830bf8-8341-45eb-8245-865b72cafce5)
+
+![image](https://github.com/huyhoangdo030420/TechSource-Website/assets/103048467/11f73c1c-d0af-42a7-b7d6-b333ac328a5f)
+
 
